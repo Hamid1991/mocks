@@ -33,7 +33,7 @@ public class ServerConfig {
         return tomcat;
     }
 
-    @Bean
+    /*@Bean
     @ConditionalOnProperty(value = "server.second.secured", havingValue = "true", matchIfMissing = true)
     public ServletWebServerFactory servletContainerSecured(@Value("${server.second.server.port}") int httpsPort,
                                                            ServerProperties serverProperties) {
@@ -91,6 +91,6 @@ public class ServerConfig {
         if (filePath == null || !new File(filePath).exists()) {
             throw new IllegalStateException(fileType + " not found at: " + filePath);
         }
-    }
+    }*/
 
 }
