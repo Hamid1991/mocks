@@ -11,11 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResourceController {
 
-    @GetMapping("/mock/ping")
-    public HealthStatus ping(@RequestHeader("Authorization") String token,
+    @GetMapping("/public")
+    public HealthStatus getPublic(@RequestHeader("Authorization") String token,
                              HttpServletRequest request) {
+        logAuthorizationHeader(token, request);
+        return new HealthStatus().setStatus("public");
+    }
+
+    @GetMapping("/private")
+    public HealthStatus getPrivate(@RequestHeader("Authorization") String token,
+                             HttpServletRequest request) {
+        logAuthorizationHeader(token, request);
+        return new HealthStatus().setStatus("private");
+    }
+
+    private static void logAuthorizationHeader(String token, HttpServletRequest request) {
         log.info("input Authorization - {} on port - {}", token, request.getServerPort());
-        return new HealthStatus().setStatus("pong");
     }
 
 }
